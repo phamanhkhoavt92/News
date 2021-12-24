@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+@media only screen and (min-width: 768px) {
+img { 
+ 		max-width:100%;
+		height:auto;
+	  
+	 }
+ 
+ 
+div#header{
+	background-color: #FF9;
+	}
+	
+button#search{
+	border: none;
+	background-color:#FF9;
+	}	
+
+div#title{
+	background-color: #FF9;
+	font-size: 200%;
+	text-align: right;
+	
+		}	
+
+
+	
+div#lookup{
+	display: none;
+	text-align: center;
+	margin: 10px;
+	
+	}
+ 
+ input.timkiem {
+	 width: 70%;
+	 	 
+	 } 
+
+div#timkiem{
+	text-align: left;
+	
+	}	 
+
+
+  
+}

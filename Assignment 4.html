@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- for mobile -->
+<link rel="stylesheet" href="home-mobile.css" type="text/css">
+
+<!-- for tablet -->
+<link rel="stylesheet" href="home-tablet.css" type="text/css">
+
+<!-- for desktop -->
+<link rel="stylesheet" href="home-desktop.css" type="text/css">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- boostrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<title>
+ MY NEWS
+</title>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+ <script>
+$(document).ready(function(){
+	
+	//lay news
+	$("button#nhan").on("click", function(){  
+		const req = new XMLHttpRequest();
+		req.open("GET", "https://gnews.io/api/v4/top-headlines?token=cbf872fbd1b0cdf7cee71504b669b49b" );
+		req.send();
+		req.onload = function(){
+			var data = JSON.parse(req.responseText);
+			var news = data.articles;
+			var out = "";
+			for (var i in news){
+					out += "<div class = \"row\">"+
+								"<div class = \" col-sm-1 col-md-1 \" id= \" news \" > </div>" +
+								"<div class = \" col-sm-3 col-md-3 \" id= \" news \" >" +
+								"<img src = \""+ news[i].image+ "\" /> </div> <br>" +
+								"<div class = \" col-sm-7 col-md-7 \" id= \" news \" > <br>"  +
+								"<a href = \""+ news[i].url+ "\">" + news[i].title + "</a> <br>" +
+								"<p>" + news[i].description + "</p>" +
+								"<p>" + news[i].publishedAt + "</p>" +
+							"</div> </div>";							
+				}
+			$("p.message").html(out);
+			}
+	 });
+	
+	// An hien tim kiem
+	$("button#search").on("click",function(){
+		
+		$("div#lookup").slideToggle("slow");
+		
+		});
+	
+	
+	// Search
+	
+	$("button#timkiem").click(function(){
+		
+		var keyword = $("input.timkiem").val();
+		const requ = new XMLHttpRequest();
+		requ.open("GET", "https://gnews.io/api/v4/search?q=" +keyword+ "&token=cbf872fbd1b0cdf7cee71504b669b49b");
+		requ.send();
+		requ.onload = function(){
+			var data = JSON.parse(requ.responseText);
+			var news = data.articles;
+			var output = "";
+			for (var i in news){
+					output += "<div class = \"row\">"+
+								"<div class = \" col-sm-1 col-md-1 \" id= \" news \" > </div>" +
+								"<div class = \" col-sm-3 col-md-3 \" id= \" news \" >" +
+								"<img src = \""+ news[i].image+ "\" /> </div> <br>" +
+								"<div class = \" col-sm-7 col-md-7 \" id= \" news \" > <br>"  +
+								"<a href = \""+ news[i].url+ "\">" + news[i].title + "</a> <br>" +
+								"<p>" + news[i].description + "</p>" +
+								"<p>" + news[i].publishedAt + "</p>" +
+							"</div> </div>";						
+				}
+			$("p.message").html(output);
+			}
+						
+		});
+					 
+});
+</script>
+
+</head>
+
+<body>
+
+<div id ="header" class = "row">
+	<div class = "col-sm-6 col-md-6" id= "title"> MY NEWS </div>
+    
+    <div class = "col-sm-6 col-md-6" id= "titlebt" >
+		<button id ="search"><i class="fa fa-search"></i></button>
+    </div>
+    
+</div>
+
+<div class = "row" id = "lookup"> 
+	
+    <div class ="col-sm-8 col-md-8">
+    <form>
+		<input type = "text" name="search" class= "timkiem">
+	</form>
+   </div>
+     
+    <div class ="col-sm-1 col-md-1" id ="timkiem">
+	<button id ="timkiem">search</button>
+ 	</div>
+    
+</div>
+
+
+
+<div class="row">
+	<div class ="col-sm-1 col-md-1">
+  	</div>
+  	<div class ="col-sm-8 col-md-8">
+	<button id= "nhan">nhan de doc tin tuc </button>
+	</div>
+</div>
+
+<p class= "message">  </p>
+
+
+
+</body>
+</html>
